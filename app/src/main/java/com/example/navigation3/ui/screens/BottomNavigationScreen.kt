@@ -31,26 +31,24 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation3.runtime.NavEntry
 import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.ui.NavDisplay
+import com.example.navigation3.navigation.BottomNavTab
 import com.example.navigation3.navigation.DetailScreen
 import com.example.navigation3.navigation.HomeScreen
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun BottomNavScreen(modifier: Modifier = Modifier,onNavigate:()-> Unit) {
-    val bottomNavItems = remember {
-        listOf(HomeScreen(), DetailScreen())
-    }
 
+    val bottomNavItems = remember { BottomNavTab.entries }
     val homeBackStack = rememberNavBackStack(HomeScreen())
     val detailBackStack = rememberNavBackStack(DetailScreen())
     var selectedTabIndex by rememberSaveable { mutableIntStateOf(0) }
-
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         bottomBar = {
             NavigationBar(
-                containerColor = Color.White,
+                containerColor = Color.LightGray,
                 tonalElevation = 8.dp
             ) {
                 bottomNavItems.forEachIndexed { index, item ->
@@ -60,7 +58,7 @@ fun BottomNavScreen(modifier: Modifier = Modifier,onNavigate:()-> Unit) {
                     val hapticFeedback = LocalHapticFeedback.current
 
                     NavigationBarItem(
-                        modifier = Modifier.background(color = Color.White),
+                        modifier = Modifier.background(color = Color.LightGray),
                         selected = selected,
                         onClick = {
                             hapticFeedback.performHapticFeedback(HapticFeedbackType.LongPress)

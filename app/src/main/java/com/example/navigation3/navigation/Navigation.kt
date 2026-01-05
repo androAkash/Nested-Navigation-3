@@ -6,6 +6,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.animation.togetherWith
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation3.runtime.NavEntry
@@ -19,31 +20,32 @@ fun Navigation() {
     val backStack = rememberNavBackStack(AuthenticationScreen())
 
     NavDisplay(
-        modifier = Modifier,
+        modifier = Modifier.fillMaxSize(),
         backStack = backStack,
         onBack = { backStack.removeLastOrNull() },
         entryProvider = { key ->
             when (key) {
+                is AuthenticationScreen -> NavEntry(key) {
+                    AuthScreenUi(
+                        modifier = Modifier.fillMaxSize(),
+                        onNavigate = {
+                            backStack.clear()
+                            backStack.add(BottomNavigationScreen())
+                        }
+                    )
+                }
 
-                is AuthenticationScreen ->
-                    NavEntry(key){
-                        AuthScreenUi(
-                            modifier = Modifier,
-                            onNavigate = {
-                                backStack.clear()
-                                backStack.add(BottomNavigationScreen())
-                            })
-                    }
-
-                is BottomNavigationScreen ->
-                    NavEntry(key = key) {
-                        BottomNavScreen(modifier = Modifier){
+                is BottomNavigationScreen -> NavEntry(key) {
+                    BottomNavScreen(
+                        modifier = Modifier.fillMaxSize(),
+                        onNavigate = {
                             backStack.clear()
                             backStack.add(AuthenticationScreen())
                         }
-                    }
+                    )
+                }
 
-                else -> throw RuntimeException("Invalid NavKey.")
+                else -> throw RuntimeException("Invalid NavKey for root navigation.")
             }
         },
         transitionSpec = {
@@ -57,12 +59,6 @@ fun Navigation() {
                 targetOffsetY = { it },
                 animationSpec = tween(1000)
             )
-        },
-        predictivePopTransitionSpec = {
-            EnterTransition.None togetherWith slideOutVertically(
-                targetOffsetY = { it },
-                animationSpec = tween(1000)
-            )
-        },
+        }
     )
 }
