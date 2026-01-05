@@ -6,23 +6,12 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class AuthenticationScreen(val refreshTrigger: Int = 0) : NavKey
-
 @Serializable
 data class BottomNavigationScreen(val refreshTrigger: Int = 0) : NavKey
-
-// Home Tab Screens
 @Serializable
 data class HomeScreen(val refreshTrigger: Int = 0) : NavKey
-
-@Serializable
-data class HomeDetailScreen(val itemId: String) : NavKey
-
-// Detail Tab Screens
 @Serializable
 data class DetailScreen(val refreshTrigger: Int = 0) : NavKey
-
-@Serializable
-data class DetailSubScreen(val detailId: String) : NavKey
 
 interface BottomNavItem {
     val fillIcon: Int
