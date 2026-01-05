@@ -36,7 +36,7 @@ import com.example.navigation3.navigation.HomeScreen
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun BottomNavScreen(modifier: Modifier = Modifier) {
+fun BottomNavScreen(modifier: Modifier = Modifier,onNavigate:()-> Unit) {
     val bottomNavItems = remember {
         listOf(HomeScreen(), DetailScreen())
     }
@@ -118,7 +118,7 @@ fun BottomNavScreen(modifier: Modifier = Modifier) {
             .fillMaxSize()
             .padding(innerPadding)
 
-        AnimatedContent(
+/*        AnimatedContent(
             targetState = selectedTabIndex,
             label = "BottomTabAnimation",
             transitionSpec = {
@@ -130,8 +130,8 @@ fun BottomNavScreen(modifier: Modifier = Modifier) {
                             slideOutHorizontally { it }
                 }
             }
-        ) { tabIndex->
-            when (tabIndex) {
+        ) { tabIndex->*/
+            when (selectedTabIndex) {
                 0 -> {
                     NavDisplay(
                         modifier = Modifier
@@ -146,7 +146,9 @@ fun BottomNavScreen(modifier: Modifier = Modifier) {
                                         HomeScreenUi(
                                             modifier = screenModifier,
                                             data = "",
-                                            onclick = {}
+                                            onclick = {
+                                                onNavigate()
+                                            }
                                         )
                                     }
                                 }
@@ -183,6 +185,6 @@ fun BottomNavScreen(modifier: Modifier = Modifier) {
                     )
                 }
             }
-        }
+//        }
     }
 }

@@ -5,6 +5,8 @@ import com.example.navigation3.R
 import kotlinx.serialization.Serializable
 
 @Serializable
+data class AuthenticationScreen(val refreshTrigger: Int = 0,): NavKey
+@Serializable
 data class BottomNavigationScreen(
     val refreshTrigger: Int = 0,
 ) : NavKey

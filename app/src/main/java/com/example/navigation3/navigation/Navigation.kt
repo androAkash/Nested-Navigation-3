@@ -12,10 +12,11 @@ import androidx.navigation3.runtime.NavEntry
 import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.ui.NavDisplay
 import com.example.navigation3.ui.screens.BottomNavScreen
+import com.example.navigation3.ui.screens.AuthScreenUi
 
 @Composable
 fun Navigation() {
-    val backStack = rememberNavBackStack(BottomNavigationScreen())
+    val backStack = rememberNavBackStack(AuthenticationScreen())
 
     NavDisplay(
         modifier = Modifier,
@@ -23,13 +24,45 @@ fun Navigation() {
         onBack = { backStack.removeLastOrNull() },
         entryProvider = { key ->
             when (key) {
+
+                is AuthenticationScreen ->
+                    NavEntry(key){
+                        AuthScreenUi(
+                            modifier = Modifier,
+                            onNavigate = {
+                                backStack.clear()
+                                backStack.add(BottomNavigationScreen())
+                            })
+                    }
+
                 is BottomNavigationScreen ->
                     NavEntry(key = key) {
-                        BottomNavScreen(modifier = Modifier)
+                        BottomNavScreen(modifier = Modifier){
+                            backStack.clear()
+                            backStack.add(AuthenticationScreen())
+                        }
                     }
 
                 else -> throw RuntimeException("Invalid NavKey.")
             }
-        }
+        },
+        transitionSpec = {
+            slideInVertically(
+                initialOffsetY = { it },
+                animationSpec = tween(1000)
+            ) togetherWith ExitTransition.KeepUntilTransitionsFinished
+        },
+        popTransitionSpec = {
+            EnterTransition.None togetherWith slideOutVertically(
+                targetOffsetY = { it },
+                animationSpec = tween(1000)
+            )
+        },
+        predictivePopTransitionSpec = {
+            EnterTransition.None togetherWith slideOutVertically(
+                targetOffsetY = { it },
+                animationSpec = tween(1000)
+            )
+        },
     )
 }
