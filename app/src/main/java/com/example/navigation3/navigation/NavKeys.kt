@@ -4,25 +4,34 @@ import androidx.navigation3.runtime.NavKey
 import com.example.navigation3.R
 import kotlinx.serialization.Serializable
 
-@Serializable
-data class AuthenticationScreen(val refreshTrigger: Int = 0) : NavKey
+sealed interface RootNav : NavKey
+sealed interface BottomNav : NavKey
 
 @Serializable
-data class BottomNavigationScreen(val refreshTrigger: Int = 0) : NavKey
-
-// Home Tab Screens
-@Serializable
-data class HomeScreen(val refreshTrigger: Int = 0) : NavKey
+data class AuthenticationScreen(
+    val refreshTrigger: Int = 0
+) :RootNav
 
 @Serializable
-data class HomeDetailScreen(val itemId: String) : NavKey
-
-// Detail Tab Screens
-@Serializable
-data class DetailScreen(val refreshTrigger: Int = 0) : NavKey
+data class BottomNavigationScreen(
+    val refreshTrigger: Int = 0
+) :RootNav
 
 @Serializable
-data class DetailSubScreen(val detailId: String) : NavKey
+data class HomeScreen(
+    val refreshTrigger: Int = 0
+) :NavKey, BottomNav
+
+@Serializable
+data class ProfileScreen(
+    val refreshTrigger: Int = 0
+) :BottomNav
+
+@Serializable
+data class DetailScreen(
+    val title: Int,
+    val refreshTrigger: Int = 0
+) : RootNav
 
 interface BottomNavItem {
     val fillIcon: Int
@@ -43,10 +52,10 @@ enum class BottomNavTab(
         title = "Home",
         rootScreen = HomeScreen()
     ),
-    DETAIL(
+    PROFILE(
         fillIcon = R.drawable.baseline_person_24,
         outlineIcon = R.drawable.outline_person_24,
-        title = "Detail",
-        rootScreen = DetailScreen()
+        title = "Profile",
+        rootScreen = ProfileScreen()
     )
 }

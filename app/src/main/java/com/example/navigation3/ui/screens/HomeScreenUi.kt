@@ -1,11 +1,15 @@
 package com.example.navigation3.ui.screens
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -27,7 +31,7 @@ import com.example.navigation3.R
 fun HomeScreenUi(
     modifier: Modifier,
     data: String,
-    onclick: () -> Unit
+    onItemClick: (Int) -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -48,33 +52,20 @@ fun HomeScreenUi(
             )
         }
     ) {
-        Box(
-            modifier = modifier.fillMaxSize(),
-            contentAlignment = Alignment.Center
+        LazyColumn(
+            modifier = modifier.fillMaxSize()
         ) {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
+            items(10) { index ->
+                val title = "Item #$index"
 
                 Text(
-                    text = "Home Screen"
-                )
-
-                Button(
-                    onClick = {
-                        onclick()
-                    }
-                ) {
-                    Text(
-                        text = "Go to Authentication Screen"
-                    )
-                }
-
-                Spacer(modifier = Modifier.height(16.dp))
-
-                Text(
-                    text = data,
-                    fontWeight = FontWeight.Medium
+                    text = title,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable {
+                            onItemClick(index)
+                        }
+                        .padding(16.dp)
                 )
             }
         }

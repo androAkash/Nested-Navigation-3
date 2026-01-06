@@ -1,47 +1,22 @@
 package com.example.navigation3.ui.screens
 
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.text.font.FontWeight
 
 @Composable
-fun DetailScreenUi(
-    modifier: Modifier,
-    onLogout: () -> Unit
-) {
+fun DetailScreenUi(index: Int) {
     Box(
-        modifier = modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-
-            Text(
-                text = "Detail Screen"
-            )
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-
-            Button(
-                onClick = {
-                    onLogout()
-                }
-            ) {
-                Text(
-                    text = "Go to Home"
-                )
-            }
-
-        }
+        Text(
+            text = "Detail Screen\n$index",
+            fontWeight = FontWeight.Bold
+        )
     }
 }

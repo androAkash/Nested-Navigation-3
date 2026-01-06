@@ -1,10 +1,6 @@
 package com.example.navigation3.ui.screens
 
 import android.annotation.SuppressLint
-import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.slideInHorizontally
-import androidx.compose.animation.slideOutHorizontally
-import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -33,15 +29,16 @@ import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.ui.NavDisplay
 import com.example.navigation3.navigation.BottomNavTab
 import com.example.navigation3.navigation.DetailScreen
+import com.example.navigation3.navigation.ProfileScreen
 import com.example.navigation3.navigation.HomeScreen
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun BottomNavScreen(modifier: Modifier = Modifier,onNavigate:()-> Unit) {
+fun BottomNavScreen(modifier: Modifier = Modifier,onOpenDetail: (Int) -> Unit) {
 
     val bottomNavItems = remember { BottomNavTab.entries }
     val homeBackStack = rememberNavBackStack(HomeScreen())
-    val detailBackStack = rememberNavBackStack(DetailScreen())
+    val detailBackStack = rememberNavBackStack(ProfileScreen())
     var selectedTabIndex by rememberSaveable { mutableIntStateOf(0) }
 
     Scaffold(
@@ -74,7 +71,7 @@ fun BottomNavScreen(modifier: Modifier = Modifier,onNavigate:()-> Unit) {
                                     }
                                     1 -> {
                                         detailBackStack.clear()
-                                        detailBackStack.add(DetailScreen())
+                                        detailBackStack.add(ProfileScreen())
                                     }
                                 }
                             } else {
@@ -115,20 +112,6 @@ fun BottomNavScreen(modifier: Modifier = Modifier,onNavigate:()-> Unit) {
         val screenModifier = modifier
             .fillMaxSize()
             .padding(innerPadding)
-
-/*        AnimatedContent(
-            targetState = selectedTabIndex,
-            label = "BottomTabAnimation",
-            transitionSpec = {
-                if (targetState > initialState) {
-                    slideInHorizontally { it } togetherWith
-                            slideOutHorizontally { -it }
-                } else {
-                    slideInHorizontally { -it } togetherWith
-                            slideOutHorizontally { it }
-                }
-            }
-        ) { tabIndex->*/
             when (selectedTabIndex) {
                 0 -> {
                     NavDisplay(
@@ -144,8 +127,8 @@ fun BottomNavScreen(modifier: Modifier = Modifier,onNavigate:()-> Unit) {
                                         HomeScreenUi(
                                             modifier = screenModifier,
                                             data = "",
-                                            onclick = {
-                                                onNavigate()
+                                            onItemClick = { title ->
+                                                onOpenDetail(title)
                                             }
                                         )
                                     }
@@ -165,9 +148,9 @@ fun BottomNavScreen(modifier: Modifier = Modifier,onNavigate:()-> Unit) {
                         onBack = { detailBackStack.removeLastOrNull() },
                         entryProvider = { key ->
                             when (key) {
-                                is DetailScreen -> {
+                                is ProfileScreen -> {
                                     NavEntry(key = key) {
-                                        DetailScreenUi(
+                                        ProfileScreenUi(
                                             modifier = screenModifier,
                                             onLogout = {
                                                 homeBackStack.clear()
@@ -183,6 +166,6 @@ fun BottomNavScreen(modifier: Modifier = Modifier,onNavigate:()-> Unit) {
                     )
                 }
             }
-//        }
+
     }
 }

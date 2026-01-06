@@ -14,23 +14,24 @@ import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.ui.NavDisplay
 import com.example.navigation3.ui.screens.BottomNavScreen
 import com.example.navigation3.ui.screens.AuthScreenUi
+import com.example.navigation3.ui.screens.DetailScreenUi
 
 @Composable
 fun Navigation() {
-    val backStack = rememberNavBackStack(AuthenticationScreen())
+    val rootBackStack = rememberNavBackStack(AuthenticationScreen())
 
     NavDisplay(
         modifier = Modifier.fillMaxSize(),
-        backStack = backStack,
-        onBack = { backStack.removeLastOrNull() },
+        backStack = rootBackStack,
+        onBack = { rootBackStack.removeLastOrNull() },
         entryProvider = { key ->
             when (key) {
                 is AuthenticationScreen -> NavEntry(key) {
                     AuthScreenUi(
                         modifier = Modifier.fillMaxSize(),
                         onNavigate = {
-                            backStack.clear()
-                            backStack.add(BottomNavigationScreen())
+                            rootBackStack.clear()
+                            rootBackStack.add(BottomNavigationScreen())
                         }
                     )
                 }
@@ -38,12 +39,20 @@ fun Navigation() {
                 is BottomNavigationScreen -> NavEntry(key) {
                     BottomNavScreen(
                         modifier = Modifier.fillMaxSize(),
-                        onNavigate = {
-                            backStack.clear()
-                            backStack.add(AuthenticationScreen())
+                        onOpenDetail = { index ->
+                            rootBackStack.add(
+                                DetailScreen(index)
+                            )
                         }
                     )
                 }
+
+                is DetailScreen ->
+                    NavEntry(key) {
+                        DetailScreenUi(
+                            index = key.title
+                        )
+                    }
 
                 else -> throw RuntimeException("Invalid NavKey for root navigation.")
             }
