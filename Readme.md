@@ -141,12 +141,3 @@ The architecture scales cleanly without refactors.
 Free to use, modify, and learn from.
 
 ---
-
-If you want, I can also:
-
-* Simplify this further
-* Add architecture diagrams
-* Convert it into a library-style README
-* Improve visuals or badges
-
-Just tell me 👍
