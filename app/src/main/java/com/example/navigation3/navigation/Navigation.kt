@@ -1,5 +1,6 @@
 package com.example.navigation3.navigation
 
+import android.annotation.SuppressLint
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInHorizontally
@@ -32,6 +33,7 @@ private val bottomBarRoots = setOf(
     EmailScreen::class,
     MeetScreen::class
 )
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun Navigation() {
     val backStack = rememberNavBackStack(EmailScreen)
@@ -58,7 +60,7 @@ fun Navigation() {
                     BottomBar(backStack = backStack)
                 }
             }
-        ) { padding ->
+        ) {
             NavDisplay(backStack = backStack,
                 onBack = {},
                 entryProvider = { key ->
