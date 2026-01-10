@@ -45,7 +45,7 @@ A short walkthrough showing:
 ## 🎥 Demo
 
 <p align="center">
-  <img src="demo.gif" width="600"/>
+  <img src="demo.gif" width="180"/>
 </p>
 
 ## 🧭 Navigation Model
