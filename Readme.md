@@ -42,11 +42,11 @@ A short walkthrough showing:
 - Full-screen Profile screen
 - Back stack behavior
 
-## 🎥 Demo Video
+## 🎥 Demo
 
-https://raw.githubusercontent.com/androAkash/Nested-Navigation-3/main/mainVideo.mp4
-
-
+<p align="center">
+  <img src="demo.gif" width="600"/>
+</p>
 
 ## 🧭 Navigation Model
 
