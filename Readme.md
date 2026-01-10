@@ -108,12 +108,26 @@ This keeps navigation visually clear and polished.
 
 ## 🖼 Screenshots
 
-| Screen  | Preview                          |
-| ------- |----------------------------------|
-| Email   | ![Email Screen](EmailScreen.png) |
-| Meet    | ![Meet Screen](MeetScreen.png)   |
-| Profile | ![Profile](Profile.png)          |
-| Drawer  | ![Drawer](Drawer.png)            |
+<table>
+  <tr>
+    <td align="center">
+      <b>Email</b><br/>
+      <img src="EmailScreen.png" width="180" alt=""/>
+    </td>
+    <td align="center">
+      <b>Meet</b><br/>
+      <img src="MeetScreen.png" width="180" alt=""/>
+    </td>
+    <td align="center">
+      <b>Profile</b><br/>
+      <img src="Profile.png" width="180" alt=""/>
+    </td>
+    <td align="center">
+      <b>Drawer</b><br/>
+      <img src="Drawer.png" width="180" alt=""/>
+    </td>
+  </tr>
+</table>
 
 ---
 
