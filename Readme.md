@@ -45,7 +45,7 @@ A short walkthrough showing:
 ## 🎥 Demo
 
 <p align="center">
-  <img src="demo.gif" width="180"/>
+  <img src="asset/demo/demo.gif" width="180"/>
 </p>
 
 ## 🧭 Navigation Model
@@ -112,19 +112,19 @@ This keeps navigation visually clear and polished.
   <tr>
     <td align="center">
       <b>Email</b><br/>
-      <img src="EmailScreen.png" width="180" alt=""/>
+      <img src="asset/demo/EmailScreen.png" width="180" alt=""/>
     </td>
     <td align="center">
       <b>Meet</b><br/>
-      <img src="MeetScreen.png" width="180" alt=""/>
+      <img src="asset/demo/MeetScreen.png" width="180" alt=""/>
     </td>
     <td align="center">
       <b>Profile</b><br/>
-      <img src="Profile.png" width="180" alt=""/>
+      <img src="asset/demo/Profile.png" width="180" alt=""/>
     </td>
     <td align="center">
       <b>Drawer</b><br/>
-      <img src="Drawer.png" width="180" alt=""/>
+      <img src="asset/demo/Drawer.png" width="180" alt=""/>
     </td>
   </tr>
 </table>
